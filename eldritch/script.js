@@ -418,3 +418,36 @@ const difficulties = [
         name: 'Очень тяжёлый'
     },
 ]
+
+class Ancients{
+    constructor(){
+        this.ancients = document.querySelector('.ancients');
+        this.countAncients = null;
+        this.ancientsArr = [];
+        this.ancientsArr.push(document.querySelector('.azathoth'));
+        this.ancientsArr.push(document.querySelector('.cthulhu'));
+        this.ancientsArr.push(document.querySelector('.iogsothoth'));
+        this.ancientsArr.push(document.querySelector('.shubniggurath'));
+        this.ancients.addEventListener('click',(e)=>{
+            console.log(e.target);
+        })
+    }
+    getChange(){
+        return this.countAncients;
+    }
+}
+
+class Level{
+    constructor(){
+        this.elemLvl = document.querySelectorAll('.level-item');
+        this.lvlList = document.querySelector('.level-list');
+        this.lvlList.addEventListener('click', (e)=>{
+            console.log(e.target);
+        })
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async()=>{
+    let ancients = new Ancients();
+    let lvl = new Level();
+})
