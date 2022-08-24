@@ -1,0 +1,70 @@
+html, body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: url('./assets/home.png') center/cover no-repeat border-box;
+}
+.page{
+    max-width: 1200px;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+.ancients{
+    display: grid;
+    position: relative;
+    width: 30%;
+    height: 80%;
+    margin-top: 5%;
+    grid-template-areas: 'azathoth cthulhu'
+                         'iogsothoth shubniggurath';
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    row-gap: 2%;
+    column-gap: 3%;
+}
+.azathoth{
+    grid-area: azathoth;
+    content: "";
+    background: url('./assets/Ancients/Azathoth.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.cthulhu{
+    grid-area: cthulhu;
+    content: "";
+    background: url('./assets/Ancients/Cthulthu.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.iogsothoth{
+    grid-area: iogsothoth;
+    content: "";
+    background: url('./assets/Ancients/IogSothoth.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.shubniggurath{
+    grid-area: shubniggurath;
+    content: "";
+    background: url('./assets/Ancients/ShubNiggurath.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.level{
+    width: 15%;
+    height: 30%;
+    margin-top: 20%;
+    border: 1px groove white;
+}
+.deck{
+    width: 45%;
+    height: 80%;
+    margin-top: 5%;
+    border: 1px groove red;
+}
