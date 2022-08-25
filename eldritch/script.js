@@ -313,11 +313,12 @@ const cardsGreen = [
     },
 ]
 
-const ancientsData = [
+class Ancients{
+    constructor(){
+        this.ancientsData = [
     {
         id: 'azathoth',
         name: 'azathoth',
-        cardFace: './assets/Ancients/Azathoth.png',
         firstStage: {
             greenCards: 1,
             blueCards: 1,
@@ -337,7 +338,6 @@ const ancientsData = [
     {
         id: 'cthulhu',
         name: 'cthulhu',
-        cardFace: './assets/Ancients/Cthulthu.png',
         firstStage: {
             greenCards: 0,
             blueCards: 2,
@@ -356,8 +356,7 @@ const ancientsData = [
     },
     {
         id: 'iogSothoth',
-        name: 'iogSothoth',
-        cardFace: './assets/Ancients/IogSothoth.png',
+        name: 'iogsothoth',
         firstStage: {
             greenCards: 0,
             blueCards: 1,
@@ -376,8 +375,7 @@ const ancientsData = [
     },
     {
         id: 'shubNiggurath',
-        name: 'shubNiggurath',
-        cardFace: './assets/Ancients/ShubNiggurath.png',
+        name: 'shubniggurath',
         firstStage: {
             greenCards: 1,
             blueCards: 1,
@@ -395,32 +393,6 @@ const ancientsData = [
         },
     },
 ]
-
-const difficulties = [
-    {
-        id: 'very easy',
-        name: 'Очень лёгкий'
-    },
-    {
-        id: 'easy',
-        name: 'Лёгкий'
-    },
-    {
-        id: 'normal',
-        name: 'Средний'
-    },
-    {
-        id: 'hard',
-        name: 'Тяжёлый'
-    },
-    {
-        id: 'very hard',
-        name: 'Очень тяжёлый'
-    },
-]
-
-class Ancients{
-    constructor(){
         this.ancients = document.querySelector('.ancients');
         this.countAncients = null;
         this.ancientsArr = [];
@@ -428,22 +400,86 @@ class Ancients{
         this.ancientsArr.push(document.querySelector('.cthulhu'));
         this.ancientsArr.push(document.querySelector('.iogsothoth'));
         this.ancientsArr.push(document.querySelector('.shubniggurath'));
-        this.ancients.addEventListener('click',(e)=>{
-            console.log(e.target);
-        })
+        this.ancients.addEventListener('click',clkEvent => this.setScheme(clkEvent));
     }
-    getChange(){
-        return this.countAncients;
+    setScheme(e){
+        console.log(e.target);
+        switch(e.target.className){
+            case 'azathoth':
+            this.countAncients = 0;
+            break;
+            case 'cthulhu':
+            this.countAncients = 1;
+            break;
+            case 'iogsothoth':
+            this.countAncients = 2;
+            break;
+            case 'shubniggurath':
+            this.countAncients = 3;
+            break;
+        }
+        this.#setStyleAncientsElem();
+        let save = this.ancientsData[this.countAncients];
+        this.schemeArr = [];
+        this.schemeArr.push(save.firstStage);
+        this.schemeArr.push(save.secondStage);
+        this.schemeArr.push(save.thirdStage);
+        console.log(this.schemeArr);
+    }
+    getChange(){        
+        return this.schemeArr;
+    }
+    #setStyleAncientsElem(){
+        this.ancientsArr.forEach((elem, index)=>{
+            if(index === this.countAncients){
+                elem.className = this.ancientsData[index].name + ' ancients-changed';
+            }else{
+                elem.className = this.ancientsData[index].name;
+            }
+        })
     }
 }
 
 class Level{
     constructor(){
+        this.difficulties = [
+    {
+        id: 'very-easy'
+    },
+    {
+        id: 'easy'
+    },
+    {
+        id: 'normal'
+    },
+    {
+        id: 'hard'
+    },
+    {
+        id: 'very-hard'
+    }
+]
+        this.lvlCount = null;
         this.elemLvl = document.querySelectorAll('.level-item');
         this.lvlList = document.querySelector('.level-list');
-        this.lvlList.addEventListener('click', (e)=>{
-            console.log(e.target);
+        this.lvlList.addEventListener('click', event=>this.#setLvl(event))
+    }
+    #setLvl(e){
+        this.difficulties.forEach((el, index)=>{
+            if(e.target.id === el.id){
+                this.lvlCount = index;
+            }
         })
+        this.elemLvl.forEach((elem, index)=>{
+            if(index === this.lvlCount){
+                elem.className = 'level-item' + ' level-changed';
+            }else{
+                elem.className = 'level-item';
+            }
+        })                
+    }
+    getLvl(){
+        return this.lvlCount;
     }
 }
 
