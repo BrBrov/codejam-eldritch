@@ -179,6 +179,7 @@ html, body{
     font-weight: 400;
     font-size: 1.2rem;
     color: rgb(11, 230, 110);
+    text-shadow: -8px 8px 5px rgb(0, 0, 0);
 }
 .left{
     display: block;
@@ -211,4 +212,13 @@ html, body{
     border-radius: 10px;
     border: 1px groove rgb(0, 0, 0);
     box-shadow: -3px 3px 5px 4px rgb(0, 0, 0);
+}
+.error{
+    margin-top: 2%;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: rgb(230, 62, 11);
+    text-shadow: -8px 8px 5px rgb(0, 0, 0);
 }
