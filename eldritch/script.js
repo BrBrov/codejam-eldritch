@@ -481,16 +481,16 @@ class Deck {
                 color: 'green'
             },
         ]
-        this.cardsArr={
-            1:[],
-            2:[],
-            3:[],
-            4:[],
-            5:[],
-            6:[],
-            7:[],
-            8:[],
-            9:[]
+        this.cardsArr = {
+            1: [],
+            2: [],
+            3: [],
+            4: [],
+            5: [],
+            6: [],
+            7: [],
+            8: [],
+            9: []
         };
         let stageArr = [];
         stageArr.push(document.querySelectorAll('.green'));
@@ -527,36 +527,36 @@ class Deck {
         switch (lvl) {
             case 0:
             case 1:
-            sortedCard.greenCards.easy = this.cardsGreen.filter(e=>{
-                if(e.difficulty === 'easy'){
-                    return e;
-                }
-            })
-            sortedCard.greenCards.normal = this.cardsGreen.filter(e=>{
-                if(e.difficulty === 'normal'){
-                    return e;
-                }
-            })
-            sortedCard.brownCards.easy = this.cardsBrown.filter(e=>{
-                if(e.difficulty === 'easy'){
-                    return e;
-                }
-            })
-            sortedCard.brownCards.normal = this.cardsBrown.filter(e=>{
-                if(e.difficulty === 'normal'){
-                    return e;
-                }
-            })
-            sortedCard.blueCards.easy = this.cardsBlue.filter(e=>{
-                if(e.difficulty === 'easy'){
-                    return e;
-                }
-            })
-            sortedCard.blueCards.normal = this.cardsBlue.filter(e=>{
-                if(e.difficulty === 'normal'){
-                    return e;
-                }
-            })
+                sortedCard.greenCards.easy = this.cardsGreen.filter(e => {
+                    if (e.difficulty === 'easy') {
+                        return e;
+                    }
+                })
+                sortedCard.greenCards.normal = this.cardsGreen.filter(e => {
+                    if (e.difficulty === 'normal') {
+                        return e;
+                    }
+                })
+                sortedCard.brownCards.easy = this.cardsBrown.filter(e => {
+                    if (e.difficulty === 'easy') {
+                        return e;
+                    }
+                })
+                sortedCard.brownCards.normal = this.cardsBrown.filter(e => {
+                    if (e.difficulty === 'normal') {
+                        return e;
+                    }
+                })
+                sortedCard.blueCards.easy = this.cardsBlue.filter(e => {
+                    if (e.difficulty === 'easy') {
+                        return e;
+                    }
+                })
+                sortedCard.blueCards.normal = this.cardsBlue.filter(e => {
+                    if (e.difficulty === 'normal') {
+                        return e;
+                    }
+                })
                 break;
             case 2:
                 sortedCard.greenCards = this.cardsGreen;
@@ -565,47 +565,69 @@ class Deck {
                 break;
             case 3:
             case 4:
-            sortedCard.greenCards.hard = this.cardsGreen.filter(e=>{
-                if(e.difficulty === 'hard'){
-                    return e;
-                }
-            })
-            sortedCard.greenCards.normal = this.cardsGreen.filter(e=>{
-                if(e.difficulty === 'normal'){
-                    return e;
-                }
-            })
-            sortedCard.brownCards.hard = this.cardsBrown.filter(e=>{
-                if(e.difficulty === 'hard'){
-                    return e;
-                }
-            })
-            sortedCard.brownCards.normal = this.cardsBrown.filter(e=>{
-                if(e.difficulty === 'normal'){
-                    return e;
-                }
-            })
-            sortedCard.blueCards.hard = this.cardsBlue.filter(e=>{
-                if(e.difficulty === 'hard'){
-                    return e;
-                }
-            })
-            sortedCard.blueCards.normal = this.cardsBlue.filter(e=>{
-                if(e.difficulty === 'normal'){
-                    return e;
-                }
-            })
+                sortedCard.greenCards.hard = this.cardsGreen.filter(e => {
+                    if (e.difficulty === 'hard') {
+                        return e;
+                    }
+                })
+                sortedCard.greenCards.normal = this.cardsGreen.filter(e => {
+                    if (e.difficulty === 'normal') {
+                        return e;
+                    }
+                })
+                sortedCard.brownCards.hard = this.cardsBrown.filter(e => {
+                    if (e.difficulty === 'hard') {
+                        return e;
+                    }
+                })
+                sortedCard.brownCards.normal = this.cardsBrown.filter(e => {
+                    if (e.difficulty === 'normal') {
+                        return e;
+                    }
+                })
+                sortedCard.blueCards.hard = this.cardsBlue.filter(e => {
+                    if (e.difficulty === 'hard') {
+                        return e;
+                    }
+                })
+                sortedCard.blueCards.normal = this.cardsBlue.filter(e => {
+                    if (e.difficulty === 'normal') {
+                        return e;
+                    }
+                })
                 break;
         }
         console.log(sortedCard);
         console.log(scheme);
         let controlCards = {
-            greenCards:[],
-            brownCards:[],
-            blueCards:[]
+            greenCards: [],
+            brownCards: [],
+            blueCards: []
+        }
+        let pos = 1;
+        for (const stage of scheme) {
+            for (const key in stage) {
+                let count = false;
+                while(!count){
+                    let len = sortedCard[key].easy;
+                    len = len.length;                    
+                    let index = this.#random(len);                    
+                    let card = sortedCard[key].easy[index];
+                    if(controlCards[key].includes){
+                        
+                    }
+                    this.cardsArr[pos].push(card);
+
+                }
+                pos++;
+            }
         }
 
     }
+    #getCard(len, sortedCard){
+
+    }
+
     #mathScheme(scheme) {
         let sumBlue = 0;
         let sumGreen = 0;
