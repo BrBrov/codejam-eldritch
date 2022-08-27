@@ -19,8 +19,8 @@ html, body{
     display: grid;
     position: relative;
     width: 30%;
-    height: 80%;
-    margin-top: 5%;
+    max-height: 70%;
+    margin-top: 3%;
     grid-template-areas: 'azathoth cthulhu'
                          'iogsothoth shubniggurath';
     grid-template-columns: 50% 50%;
@@ -61,8 +61,7 @@ html, body{
     transform:scale(1.1);
 }
 .azathoth:hover,.cthulhu:hover,.iogsothoth:hover,.shubniggurath:hover{
-    transform:scale(1.1);
-    border: 3px groove rgb(170, 26, 0);
+    border: 3px groove rgb(207, 135, 122);
 }
 .level{
     width: 15%;
