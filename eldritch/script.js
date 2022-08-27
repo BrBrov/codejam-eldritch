@@ -576,32 +576,32 @@ class Deck extends CardsList {
         super(cardsGreen, cardsBrown, cardsBlue);
         this.ancients = new Ancients(ancients);
         this.level = new Level();
-
+        this.stageClickControl = 0;
         let stageArr = [];
         stageArr.push(document.querySelectorAll('.green'));
         stageArr.push(document.querySelectorAll('.brown'));
         stageArr.push(document.querySelectorAll('.blue'));
         //======Scheme Block=========//
         this.cardsArr = {
-            firstStage: [],
-            secondStage: [],
-            thirdStage: []
+            0: [],
+            1: [],
+            2: []
         };
         this.deck = {
-            firstStage: {
-                1: stageArr[0][0],
-                2: stageArr[1][0],
-                3: stageArr[2][0],
+            0: {
+                greenCards: stageArr[0][0],
+                brownCards: stageArr[1][0],
+                blueCards: stageArr[2][0],
             },
-            secondStage: {
-                1: stageArr[0][1],
-                2: stageArr[1][1],
-                3: stageArr[2][1],
+            1: {
+                greenCards: stageArr[0][1],
+                brownCards: stageArr[1][1],
+                blueCards: stageArr[2][1],
             },
-            thirdStage: {
-                1: stageArr[0][2],
-                2: stageArr[1][2],
-                3: stageArr[2][2]
+            2: {
+                greenCards: stageArr[0][2],
+                brownCards: stageArr[1][2],
+                blueCards: stageArr[2][2]
             }
         };
         //===========================//
@@ -628,11 +628,7 @@ class Deck extends CardsList {
             this.err.textContent = '';
         }
         //======Mix cards======>
-        let controlCards = {
-            greenCards: [],
-            brownCards: [],
-            blueCards: []
-        }
+
         switch (this.level.lvlCount) {
             case 0:
                 let cards = this.getEasyDeck();
@@ -650,7 +646,9 @@ class Deck extends CardsList {
                 decks = this.#shuffleDeck(decks);
                 console.log(decks);
                 console.log(this.ancients.scheme);
-
+                this.#formatSchemeArray(decks);
+                console.log(this.cardsArr);
+                //=======================//
                 break;
             case 1:
                 console.log(2);
@@ -665,9 +663,100 @@ class Deck extends CardsList {
                 console.log(5);
                 break;
         }
+        this.clickDeck.addEventListener('click', (e) => {
+            console.log('click');
+
+            let endDeck = this.cardsArr[2].length;
+            if (endDeck === 0) {                
+                this.err.textContent = 'Сделать новую колоду?';
+                this.err.addEventListener('click', (ev) => {
+                    ev.stopImmediatePropagation();
+                    this.schemeBlock.dispatchEvent(this.ancients.ev);
+                    this.err.removeEventListener('click', () => { });
+                })
+                return this.stageClickControl = 0;
+            }
+            if(this.cardsArr[0].length){
+                this.stageClickControl = 0;
+            }else if(this.cardsArr[1].length){
+                this.stageClickControl = 1;
+            }else if(this.cardsArr[2].length){
+                this.stageClickControl = 2;
+            }
+            let len = this.cardsArr[this.stageClickControl].length;
+
+            console.log(this.cardsArr);
+            console.log(this.cardsArr[this.stageClickControl].length);
+            let card;
+            let index = this.#random(len-1);
+            let saveArr = [];
+            for (let i = 0; i < len; i++) {
+                if (i === index) {
+                    card = this.cardsArr[this.stageClickControl][i];
+                } else {
+                    saveArr.push(this.cardsArr[this.stageClickControl][i])
+                }
+            }
+            this.cardsArr[this.stageClickControl] = saveArr;
+            console.log(card);
+            if (card.color === 'green') {
+                this.deck[this.stageClickControl].greenCards.textContent = this.deck[this.stageClickControl].greenCards.textContent - 1;
+            } else if (card.color === 'brown') {
+                this.deck[this.stageClickControl].brownCards.textContent = this.deck[this.stageClickControl].brownCards.textContent - 1;
+            } else if (card.color === 'blue') {
+                this.deck[this.stageClickControl].blueCards.textContent = this.deck[this.stageClickControl].blueCards.textContent - 1;
+            }
+
+            let imgCard = new Image();
+            imgCard.src = card.cardFace;
+            imgCard.onload = () => {
+                this.card.src = imgCard.src;
+            } 
+
+            e.stopImmediatePropagation();
+        })
     }
 
-    #createDeckVeryEasy(decks, addedCards){
+    // {0: Array(4), 1: Array(6), 2: Array(6)}
+    // 0 : (4) [{…}, {…}, {…}, {…}]
+    // 1 : (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+    // 2 : (6) [{…}, {…}, {…}, {…}, {…}, {…}]
+
+    #formatSchemeArray(decks) {
+        this.ancients.scheme.forEach((stage, index) => {
+            for (const key in stage) {
+                if (key === 'greenCards' && decks.green.length !== 0) {
+                    let count = stage[key];
+                    while (count) {
+                        this.cardsArr[index].push(decks.green.pop());
+                        count--;
+                    }
+
+                } else if (key === 'brownCards' && decks.brown.length !== 0) {
+                    let count = stage[key];
+                    while (count) {
+                        this.cardsArr[index].push(decks.brown.pop());
+                        count--;
+                    }
+                } else if (key === 'blueCards' && decks.blue.length !== 0) {
+                    let count = stage[key];
+                    while (count) {
+                        this.cardsArr[index].push(decks.blue.pop());
+                        count--;
+                    }
+                }
+            }
+        })
+
+        this.ancients.scheme.forEach((stage, index) => {
+            let schemeStage = this.deck[index];
+            for (const key in stage) {
+                schemeStage[key].textContent = stage[key];
+            }
+        })
+    }
+
+    #createDeckVeryEasy(decks, addedCards) {
         let schemeLength = this.#mathScheme(this.ancients.scheme);
         for (const i in decks) {
             if (decks[i].length < schemeLength[i]) {
@@ -682,16 +771,16 @@ class Deck extends CardsList {
                         count++;
                     }
                 }
-            }else if(decks[i].length > schemeLength[i]){
+            } else if (decks[i].length > schemeLength[i]) {
                 let countNeedDeleteCard = decks[i].length - schemeLength[i];
                 let count = 0;
                 let arrControl = [];
-                while(count < countNeedDeleteCard){
+                while (count < countNeedDeleteCard) {
                     let index = this.#random(decks[i].length);
-                    if(!arrControl.includes(index)){
+                    if (!arrControl.includes(index)) {
                         arrControl.push(index);
-                        decks[i] = decks[i].filter((card, i)=>{
-                            if(i !== index){
+                        decks[i] = decks[i].filter((card, i) => {
+                            if (i !== index) {
                                 return card;
                             }
                         })
@@ -703,21 +792,21 @@ class Deck extends CardsList {
         return decks;
     }
 
-    #shuffleDeck(decks){
+    #shuffleDeck(decks) {
         for (const color in decks) {
             let copy = [];
-            let arrControl = [];     
+            let arrControl = [];
             let len = decks[color].length;
-            let count = 0;             
-            while(count < len){
+            let count = 0;
+            while (count < len) {
                 let index = this.#random(len);
-                if(!arrControl.includes(index)){
+                if (!arrControl.includes(index)) {
                     arrControl.push(index);
                     copy.push(decks[color].at(index));
                     count++;
                 }
             }
-            decks[color] = copy;  
+            decks[color] = copy;
         }
         return decks;
     }
