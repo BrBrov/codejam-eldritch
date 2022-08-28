@@ -71,6 +71,7 @@ html, body{
 }
 .level-list{
     list-style-type:georgian;
+    margin-left: 3%;
 }
 .level-item{
     margin-top: 5%;
@@ -200,6 +201,10 @@ html, body{
     margin-left: 2%;
     margin-top: -146%;
 }
+.left:nth-child(3):hover{
+    box-shadow: -3px -3px 3px -4px #de7575;
+    cursor: pointer;
+}
 .right-deck{
     width: 40%;
     align-items: center;
@@ -219,4 +224,6 @@ html, body{
     font-size: 1.2rem;
     color: rgb(230, 62, 11);
     text-shadow: -8px 8px 5px rgb(0, 0, 0);
+    background-color: #067c64;
+    border-radius: 10px;
 }

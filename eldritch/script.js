@@ -648,7 +648,7 @@ class Deck extends CardsList {
                     brown: cards.brown.normal,
                     blue: cards.blue.normal
                 }
-                decks = this.#createDeckVeryEasy(decks, addedCards);
+                decks = this.#createDeckVeryEasyOrVeryHard(decks, addedCards);
                 decks = this.#shuffleDeck(decks);
                 this.#formatSchemeArray(decks);
                 break;
@@ -687,7 +687,20 @@ class Deck extends CardsList {
                 this.#formatSchemeArray(decks);
                 break;
             case 4:
-                console.log(5);
+                cards = this.getHardDeck();
+                decks = {
+                    green: cards.green.hard,
+                    brown: cards.brown.hard,
+                    blue: cards.blue.hard
+                }
+                addedCards = {
+                    green: cards.green.normal,
+                    brown: cards.brown.normal,
+                    blue: cards.blue.normal
+                }
+                decks = this.#createDeckVeryEasyOrVeryHard(decks, addedCards);
+                decks = this.#shuffleDeck(decks);
+                this.#formatSchemeArray(decks);
                 break;
         }
         this.clickDeck.addEventListener('click', (e) => this.#clkGetCard(e));
@@ -772,7 +785,7 @@ class Deck extends CardsList {
             }
         })
     }
-    #createDeckVeryEasy(decks, addedCards) {
+    #createDeckVeryEasyOrVeryHard(decks, addedCards) {
         let schemeLength = this.#mathScheme(this.ancients.scheme);
         for (const i in decks) {
             if (decks[i].length < schemeLength[i]) {
