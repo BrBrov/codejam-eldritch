@@ -18,7 +18,7 @@ html, body{
 .ancients{
     display: grid;
     position: relative;
-    width: 30%;
+    width: 40%;
     max-height: 70%;
     margin-top: 3%;
     grid-template-areas: 'azathoth cthulhu'
@@ -90,7 +90,7 @@ html, body{
     color: rgb(158, 17, 17);
 }
 .deck{
-    width: 45%;
+    width: 40%;
     height: 80%;
     margin-top: 5%;
 }
@@ -169,11 +169,10 @@ html, body{
     position: absolute;
     z-index: 3;
     text-align: center;
-    color: beige;
     /* top: 65%;
     left: 60%; */
-    margin-top: -13%;
-    margin-left: 3%;
+    margin-top: -10%;
+    margin-left: 2%;
     font-family: 'Franklin Gothic Medium', serif;
     font-weight: 400;
     font-size: 1.2rem;
