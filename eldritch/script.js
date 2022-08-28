@@ -391,7 +391,11 @@ const ancients = [
 
 class CardsList {
     constructor(cardsGreen, cardsBrown, cardsBlue) {
-        this.unsortedDeckOfCard = {};//object for normal mode
+        this.unsortedDeckOfCard = {
+            green:[],
+            brown:[],
+            blue:[]
+        };//object for normal mode
         this.unsortedDeckOfCard.green = cardsGreen;
         this.unsortedDeckOfCard.brown = cardsBrown;
         this.unsortedDeckOfCard.blue = cardsBlue;
@@ -450,7 +454,11 @@ class CardsList {
         }
     }
     getNormalDeck() {
-        return this.unsortedDeckOfCard
+        return {
+            green: this.unsortedDeckOfCard.green,
+            brown: this.unsortedDeckOfCard.brown,
+            blue: this.unsortedDeckOfCard.blue
+        }
     }
     getHardDeck() {
         return {
