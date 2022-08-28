@@ -1,0 +1,229 @@
+html, body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: url('./assets/home.png') center/cover no-repeat border-box;
+}
+.page{
+    max-width: 1200px;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+.ancients{
+    display: grid;
+    position: relative;
+    width: 40%;
+    max-height: 70%;
+    margin-top: 3%;
+    grid-template-areas: 'azathoth cthulhu'
+                         'iogsothoth shubniggurath';
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    row-gap: 4%;
+    column-gap: 5%;
+}
+.azathoth{
+    grid-area: azathoth;
+    content: "";
+    background: url('./assets/Ancients/Azathoth.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.cthulhu{
+    grid-area: cthulhu;
+    content: "";
+    background: url('./assets/Ancients/Cthulthu.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.iogsothoth{
+    grid-area: iogsothoth;
+    content: "";
+    background: url('./assets/Ancients/IogSothoth.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.shubniggurath{
+    grid-area: shubniggurath;
+    content: "";
+    background: url('./assets/Ancients/ShubNiggurath.png') center/cover no-repeat padding-box;
+    border-radius: 10px;
+    box-shadow: -8px 14px 5px 4px black;
+}
+.ancients-changed{
+    border: 3px groove rgb(170, 26, 0);
+    transform:scale(1.1);
+}
+.azathoth:hover,.cthulhu:hover,.iogsothoth:hover,.shubniggurath:hover{
+    border: 3px groove rgb(207, 135, 122);
+}
+.level{
+    width: 15%;
+    height: 30%;
+    margin-top: 20%;
+    /* border: 1px groove white; */
+}
+.level-list{
+    list-style-type:georgian;
+    margin-left: 3%;
+}
+.level-item{
+    margin-top: 5%;
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-size: 1.2em;
+    font-weight: 400;
+    text-shadow: -8px 8px 5px rgb(0, 0, 0);
+    color: rgb(255, 235, 205);
+    cursor: pointer;
+}
+.level-item:hover{
+    transform:scale(1.1);
+    color: rgb(158, 17, 17);
+}
+.level-changed{
+    transform:scale(1.1);
+    color: rgb(158, 17, 17);
+}
+.deck{
+    width: 40%;
+    height: 80%;
+    margin-top: 5%;
+}
+.scheme{
+    display: grid;
+    margin: 0 auto;
+    width: 50%;
+    grid-template-columns: 100%;
+    grid-template-rows: 33%;
+    row-gap: 2%;
+    column-gap: 3%;
+}
+.stage{
+    text-align: center;
+    vertical-align: middle;
+}
+.title{
+    display: block;
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    text-shadow: -8px 8px 5px rgb(0, 0, 0);
+    color: rgb(255, 235, 205);
+}
+.green{
+    display: inline-block;
+    margin-right: 3%;
+    padding-top: 0.3em;
+    width: 2em;
+    height: 1.7em;
+    font-family: 'Franklin Gothic Medium', sans-serif;    
+    font-weight: 600;
+    background: linear-gradient(45deg, rgb(47, 192, 47), rgb(0, 128, 0));
+    border-radius: 15px;
+    box-shadow: -3px 3px 5px 4px black;
+}
+.brown{
+    display: inline-block;
+    padding-top: 0.3em;
+    width: 2em;
+    height: 1.7em;
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-weight: 600;
+    background: linear-gradient(45deg, rgb(230, 218, 61), rgb(230, 215, 8));
+    border-radius: 15px;
+    box-shadow: -3px 3px 5px 4px black;
+}
+.blue{
+    display: inline-block;
+    margin-left: 3%;
+    padding-top: 0.3em;
+    width: 2em;
+    height: 1.7em;
+    font-family: 'Franklin Gothic Medium', sans-serif;
+    font-weight: 600;
+    background: linear-gradient(45deg, rgb(37, 193, 221), rgb(3, 60, 107));
+    border-radius: 15px;
+    box-shadow: -3px 3px 5px 4px black;
+}
+.cards{
+    display: flex;
+    width: 100%;
+    margin-top: 10%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
+}
+.left-deck{
+    align-items: center;
+    width: 40%;
+}
+.left-deck::after{
+    content: "Вытянуть карту";
+    display: block;
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+    /* top: 65%;
+    left: 60%; */
+    margin-top: -10%;
+    margin-left: 2%;
+    font-family: 'Franklin Gothic Medium', serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: rgb(11, 230, 110);
+    text-shadow: -8px 8px 5px rgb(0, 0, 0);
+}
+.left{
+    display: block;
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px groove rgb(0, 0, 0);
+}
+.left:nth-child(1){
+    z-index: 0;    
+    box-shadow: -3px 3px 5px 4px rgb(0, 0, 0);
+}
+.left:nth-child(2){
+    z-index: 1;
+    margin-left: 1%;
+    margin-top: -146%;
+}
+.left:nth-child(3){
+    z-index: 2;
+    margin-left: 2%;
+    margin-top: -146%;
+}
+.left:nth-child(3):hover{
+    box-shadow: 1px 1px 3px 5px #de7575;
+    cursor: pointer;
+}
+.right-deck{
+    width: 40%;
+    align-items: center;
+}
+.right{
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px groove rgb(0, 0, 0);
+    box-shadow: -3px 3px 5px 4px rgb(0, 0, 0);
+}
+.error{
+    margin-top: 2%;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: rgb(230, 62, 11);
+    text-shadow: -8px 8px 5px rgb(0, 0, 0);
+    background-color: #067c64;
+    border-radius: 10px;
+}
