@@ -609,7 +609,6 @@ class Deck extends CardsList {
             }
         };
         //===========================//
-
         this.card = document.querySelector('.right');
         this.clickDeck = document.querySelector('.left-deck');
         this.err = document.querySelector('.error');
@@ -674,7 +673,18 @@ class Deck extends CardsList {
                 this.#formatSchemeArray(decks);
                 break;
             case 3:
-                console.log(4);
+                cards = this.getHardDeck();
+                decks  = {
+                    green: cards.green.normal,
+                    brown: cards.brown.normal,
+                    blue: cards.blue.normal
+                }
+                decks.green = decks.green.concat(cards.green.hard);
+                decks.brown = decks.brown.concat(cards.brown.hard);
+                decks.blue = decks.blue.concat(cards.blue.hard);
+                decks = this.#createDeckEasyNormalHard(decks);
+                decks = this.#shuffleDeck(decks);
+                this.#formatSchemeArray(decks);
                 break;
             case 4:
                 console.log(5);
@@ -682,7 +692,6 @@ class Deck extends CardsList {
         }
         this.clickDeck.addEventListener('click', (e) => this.#clkGetCard(e));
     }
-
     #clkGetCard(e){
         {
             let endDeck = this.cardsArr[2].length;
@@ -731,7 +740,6 @@ class Deck extends CardsList {
             e.stopImmediatePropagation();
         }
     }
-
     #formatSchemeArray(decks) {
         this.ancients.scheme.forEach((stage, index) => {
             for (const key in stage) {
@@ -764,7 +772,6 @@ class Deck extends CardsList {
             }
         })
     }
-
     #createDeckVeryEasy(decks, addedCards) {
         let schemeLength = this.#mathScheme(this.ancients.scheme);
         for (const i in decks) {
@@ -818,7 +825,6 @@ class Deck extends CardsList {
         }
         return decks;
     }
-
     #shuffleDeck(decks) {
         for (const color in decks) {
             let copy = [];
@@ -862,8 +868,6 @@ class Deck extends CardsList {
         return Math.floor(Math.random() * length);
     }
 }
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     let deck = new Deck(cardsGreen, cardsBrown, cardsBlue, ancients);
