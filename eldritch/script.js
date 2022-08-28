@@ -614,6 +614,7 @@ class Deck extends CardsList {
             1: [],
             2: []
         };
+        this.card.src = "./assets/mythicCardBackground.png";
         if (this.ancients.scheme === undefined) {
             this.err.textContent = 'Выберите Древнего!';
             return;
@@ -624,30 +625,39 @@ class Deck extends CardsList {
             this.err.textContent = '';
         }
         //======Mix cards======>
-
+        let cards;
+        let decks;
+        let addedCards;
         switch (this.level.lvlCount) {
             case 0:
-                let cards = this.getEasyDeck();
-                let decks = {
+                cards = this.getEasyDeck();
+                decks = {
                     green: cards.green.easy,
                     brown: cards.brown.easy,
                     blue: cards.blue.easy
                 }
-                let addedCards = {
+                addedCards = {
                     green: cards.green.normal,
                     brown: cards.brown.normal,
                     blue: cards.blue.normal
                 }
                 decks = this.#createDeckVeryEasy(decks, addedCards);
                 decks = this.#shuffleDeck(decks);
-                console.log(decks);
-                console.log(this.ancients.scheme);
                 this.#formatSchemeArray(decks);
-                console.log(this.cardsArr);
-                //=======================//
                 break;
             case 1:
-                console.log(2);
+                cards = this.getEasyDeck();
+                decks  = {
+                    green: cards.green.easy,
+                    brown: cards.brown.easy,
+                    blue: cards.blue.easy
+                }
+                decks.green = decks.green.concat(cards.green.normal);
+                decks.brown = decks.brown.concat(cards.brown.normal);
+                decks.blue = decks.blue.concat(cards.blue.normal);
+                decks = this.#createDeckEasy(decks);
+                decks = this.#shuffleDeck(decks);
+                this.#formatSchemeArray(decks);
                 break;
             case 2:
                 console.log(3);
@@ -659,16 +669,18 @@ class Deck extends CardsList {
                 console.log(5);
                 break;
         }
-        this.clickDeck.addEventListener('click', (e) => {
-            console.log('click');
+        this.clickDeck.addEventListener('click', (e) => this.#clkGetCard(e));
+    }
 
+    #clkGetCard(e){
+        {
             let endDeck = this.cardsArr[2].length;
-            if (endDeck === 0) {                
+            if (endDeck === 0) {
                 this.err.textContent = 'Сделать новую колоду?';
                 this.err.addEventListener('click', (ev) => {
                     ev.stopImmediatePropagation();
                     this.schemeBlock.dispatchEvent(this.ancients.ev);
-                    this.err.removeEventListener('click', () => { });
+                    this.err.removeEventListener('click', () => {});
                 })
                 return this.stageClickControl = 0;
             }
@@ -680,9 +692,6 @@ class Deck extends CardsList {
                 this.stageClickControl = 2;
             }
             let len = this.cardsArr[this.stageClickControl].length;
-
-            console.log(this.cardsArr);
-            console.log(this.cardsArr[this.stageClickControl].length);
             let card;
             let index = this.#random(len-1);
             let saveArr = [];
@@ -694,7 +703,6 @@ class Deck extends CardsList {
                 }
             }
             this.cardsArr[this.stageClickControl] = saveArr;
-            console.log(card);
             if (card.color === 'green') {
                 this.deck[this.stageClickControl].greenCards.textContent = this.deck[this.stageClickControl].greenCards.textContent - 1;
             } else if (card.color === 'brown') {
@@ -707,16 +715,11 @@ class Deck extends CardsList {
             imgCard.src = card.cardFace;
             imgCard.onload = () => {
                 this.card.src = imgCard.src;
-            } 
+            }
 
             e.stopImmediatePropagation();
-        })
+        }
     }
-
-    // {0: Array(4), 1: Array(6), 2: Array(6)}
-    // 0 : (4) [{…}, {…}, {…}, {…}]
-    // 1 : (6) [{…}, {…}, {…}, {…}, {…}, {…}]
-    // 2 : (6) [{…}, {…}, {…}, {…}, {…}, {…}]
 
     #formatSchemeArray(decks) {
         this.ancients.scheme.forEach((stage, index) => {
@@ -786,6 +789,24 @@ class Deck extends CardsList {
         }
         return decks;
     }
+    #createDeckEasy(decks){
+        let lengthScheme = this.#mathScheme(this.ancients.scheme);
+        for (const key in lengthScheme) {
+            let cards = [];
+            let count = lengthScheme[key];
+            let arrControl = [];
+            while (count){
+                let index = this.#random(decks[key].length);
+                if(!arrControl.includes(index)){
+                    arrControl.push(index);
+                    cards.push(decks[key].at(index));
+                    count--;
+                }
+            }
+            decks[key] = cards;
+        }
+        return decks;
+    }
 
     #shuffleDeck(decks) {
         for (const color in decks) {
@@ -833,7 +854,7 @@ class Deck extends CardsList {
 
 
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     let deck = new Deck(cardsGreen, cardsBrown, cardsBlue, ancients);
 })
 
