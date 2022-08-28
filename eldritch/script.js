@@ -7,7 +7,7 @@ const cardsBlue = [
     },
     {
         id: 'blue2',
-        cardFace: './assets/MythicCards/blue/blue.2png',
+        cardFace: './assets/MythicCards/blue/blue2.png',
         difficulty: 'hard',
         color: 'blue'
     },
@@ -655,12 +655,15 @@ class Deck extends CardsList {
                 decks.green = decks.green.concat(cards.green.normal);
                 decks.brown = decks.brown.concat(cards.brown.normal);
                 decks.blue = decks.blue.concat(cards.blue.normal);
-                decks = this.#createDeckEasy(decks);
+                decks = this.#createDeckEasyNormalHard(decks);
                 decks = this.#shuffleDeck(decks);
                 this.#formatSchemeArray(decks);
                 break;
             case 2:
-                console.log(3);
+                decks = this.getNormalDeck();
+                decks = this.#createDeckEasyNormalHard(decks);
+                decks = this.#shuffleDeck(decks);
+                this.#formatSchemeArray(decks);
                 break;
             case 3:
                 console.log(4);
@@ -789,7 +792,7 @@ class Deck extends CardsList {
         }
         return decks;
     }
-    #createDeckEasy(decks){
+    #createDeckEasyNormalHard(decks){
         let lengthScheme = this.#mathScheme(this.ancients.scheme);
         for (const key in lengthScheme) {
             let cards = [];
