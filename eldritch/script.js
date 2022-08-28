@@ -582,11 +582,7 @@ class Deck extends CardsList {
         stageArr.push(document.querySelectorAll('.brown'));
         stageArr.push(document.querySelectorAll('.blue'));
         //======Scheme Block=========//
-        this.cardsArr = {
-            0: [],
-            1: [],
-            2: []
-        };
+        this.cardsArr = {};
         this.deck = {
             0: {
                 greenCards: stageArr[0][0],
@@ -613,10 +609,10 @@ class Deck extends CardsList {
         this.schemeBlock.addEventListener('classEvent', () => this.setScheme());
     }
     setScheme() {
-        let sortedCard = {
-            greenCards: {},
-            brownCards: {},
-            blueCards: {}
+        this.cardsArr = {
+            0: [],
+            1: [],
+            2: []
         };
         if (this.ancients.scheme === undefined) {
             this.err.textContent = 'Выберите Древнего!';
@@ -731,7 +727,6 @@ class Deck extends CardsList {
                         this.cardsArr[index].push(decks.green.pop());
                         count--;
                     }
-
                 } else if (key === 'brownCards' && decks.brown.length !== 0) {
                     let count = stage[key];
                     while (count) {
